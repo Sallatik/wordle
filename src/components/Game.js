@@ -5,7 +5,7 @@ import { updateState, defaultState } from "../StateUpdater";
 
 export default () => {
   const [state, setState] = useState(defaultState);
-  const keyPressHandler = (e) => setState(updateState(state, e.key));
+  const keyPressHandler = (e) => setState((prev) => updateState(prev, e.key));
   return (
     <div>
       {state.won && <h1>Congrats!</h1>}
