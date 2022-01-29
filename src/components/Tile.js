@@ -1,3 +1,5 @@
 import "./Tile.css";
 
-export default () => <div className="tile"></div>;
+export default ({ letter, color }) => (
+  <div className={"tile " + color}>{letter}</div>
+);

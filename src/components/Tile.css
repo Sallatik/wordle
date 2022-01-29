@@ -13,3 +13,15 @@
   user-select: none;
   border: 2px solid gray;
 }
+
+.green {
+  background-color: green;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.black {
+  background-color: black;
+}

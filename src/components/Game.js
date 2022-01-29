@@ -1,12 +1,18 @@
 import "./Game.css";
 import Row from "./Row";
 
-export default () => (
-  <div className="game">
-      <Row />
-      <Row />
-      <Row />
-      <Row />
-      <Row />
-  </div>
-);
+const rows = [
+  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
+  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
+  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
+  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
+  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}]
+];
+
+export default () => {
+  return (
+    <div className="game">
+      {rows.map(tiles => <Row tiles={tiles}/>)}
+    </div>
+  );
+};
