@@ -1,18 +1,16 @@
 import "./Game.css";
 import Row from "./Row";
-
-const rows = [
-  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
-  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
-  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
-  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}],
-  [{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""},{color:"black", letter:""}]
-];
+import { useState } from "react";
+import { updateState, defaultState } from "../StateUpdater";
 
 export default () => {
+  const [state, setState] = useState(defaultState);
+  const keyPressHandler = (e) => setState(updateState(state, e.key));
   return (
-    <div className="game">
-      {rows.map(tiles => <Row tiles={tiles}/>)}
+    <div className="game" tabIndex="0" onKeyDown={keyPressHandler}>
+      {state.tiles.map((row) => (
+        <Row tiles={row} />
+      ))}
     </div>
   );
 };

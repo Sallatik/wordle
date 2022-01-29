@@ -3,8 +3,8 @@ import "./Row.css";
 
 export default ({ tiles }) => (
   <div className="row">
-    {tiles.map((tile) => (
-      <Tile color={tile.color} letter={tile.letter} />
+    {tiles.map(({color, letter}) => (
+      <Tile color={color} letter={letter} />
     ))}
   </div>
 );
