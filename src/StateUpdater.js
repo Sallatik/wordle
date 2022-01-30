@@ -13018,7 +13018,7 @@ export const updateState = (state, key) => {
   if (state.locked) return [state, ""];
   const newState = copyState(state);
   let gameResult = "";
-  if (key.length == 1) {
+  if (key.length === 1) {
     const row = newState.tiles[newState.row];
     const tile = row && row[newState.tile];
     if (tile) {
@@ -13040,7 +13040,7 @@ export const updateState = (state, key) => {
         if (isRowWinning(row)) {
           newState.locked = true;
           gameResult = "won";
-        } else if (newState.row == newState.tiles.length - 1) {
+        } else if (newState.row === newState.tiles.length - 1) {
           newState.locked = true;
           gameResult = "lost";
         } else {
