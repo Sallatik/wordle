@@ -2,19 +2,15 @@ import "./Game.css";
 import Row from "./Row";
 import { useState } from "react";
 import { updateState, defaultState } from "../StateUpdater";
+import Board from "./Board";
+import StatusMessage from "./StatusMessage";
 
 export default () => {
-  const [state, setState] = useState(defaultState);
-  const keyPressHandler = (e) => setState((prev) => updateState(prev, e.key));
+  const [gameStatus, setGameStatus] = useState("playing");
   return (
     <div>
-      {state.won && <h1>Congrats!</h1>}
-      {state.lost && <h1>Loser!</h1>}
-      <div className="game" tabIndex="0" onKeyDown={keyPressHandler}>
-        {state.tiles.map((row) => (
-          <Row tiles={row} />
-        ))}
-      </div>
+      <StatusMessage gameStatus={gameStatus} />
+      <Board onGameResult={setGameStatus} />
     </div>
   );
 };

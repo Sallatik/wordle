@@ -12979,7 +12979,7 @@ const pickWinningNumber = () => {
   const s = new Date(2021, 5, 19, 0, 0, 0, 0);
   const t = new Date().setHours(0, 0, 0, 0) - s.setHours(0, 0, 0, 0);
   return Math.round(t / 864e5) % La.length;
-}
+};
 
 const word = La[pickWinningNumber()];
 
@@ -13015,8 +13015,9 @@ const deleteOne = (array, element) => {
 const isRowWinning = (row) => row.every((tile) => tile.color === "green");
 
 export const updateState = (state, key) => {
-  if (state.won || state.lost) return state;
+  if (state.locked) return [state, ""];
   const newState = copyState(state);
+  let gameResult = "";
   if (key.length == 1) {
     const row = newState.tiles[newState.row];
     const tile = row && row[newState.tile];
@@ -13036,12 +13037,13 @@ export const updateState = (state, key) => {
     if (row && newState.tile === row.length) {
       if (La.includes(toWord(row)) || Ta.includes(toWord(row))) {
         markRow(row);
-        if (isRowWinning(row)) newState.won = true;
-        else if (newState.row == newState.tiles.length - 1) {
-          newState.lost = true;
-          alert("it was " + word + ", dumbass!");
-        }
-        else {
+        if (isRowWinning(row)) {
+          newState.locked = true;
+          gameResult = "won";
+        } else if (newState.row == newState.tiles.length - 1) {
+          newState.locked = true;
+          gameResult = "lost";
+        } else {
           newState.row++;
           newState.tile = 0;
         }
@@ -13050,7 +13052,7 @@ export const updateState = (state, key) => {
       }
     }
   }
-  return newState;
+  return [newState, gameResult];
 };
 
 export const defaultState = {
@@ -13093,6 +13095,5 @@ export const defaultState = {
   ],
   row: 0,
   tile: 0,
-  won: false,
-  lost: false,
+  locked: false,
 };
