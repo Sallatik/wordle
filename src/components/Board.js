@@ -15,8 +15,8 @@ export default ({ onGameResult }) => {
   return (
     <div>
       <div className="board" tabIndex="0" onKeyDown={keyPressHandler}>
-        {state.tiles.map((row) => (
-          <Row tiles={row} />
+        {state.tiles.map((row, index) => (
+          <Row key={index} tiles={row} />
         ))}
       </div>
     </div>

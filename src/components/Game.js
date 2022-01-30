@@ -1,7 +1,5 @@
 import "./Game.css";
-import Row from "./Row";
 import { useState } from "react";
-import { updateState, defaultState } from "../StateUpdater";
 import Board from "./Board";
 import StatusMessage from "./StatusMessage";
 
