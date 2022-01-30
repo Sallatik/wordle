@@ -1,5 +1,7 @@
 import "./Tile.css";
 
 export default ({ letter, color }) => (
-  <div className={"tile " + color}>{letter}</div>
+  <div className="tile" style={{ backgroundColor: color }}>
+    {letter}
+  </div>
 );
