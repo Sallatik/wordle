@@ -1,7 +1,8 @@
 import "./Board.css";
 import Row from "./Row";
 import { useState } from "react";
-import { updateBoardState, defaultBoardState } from "../modules/BoardState";
+import { updateBoardState } from "../modules/BoardStateUpdater";
+import { defaultBoardState } from "../modules/DefaultState";
 
 export default ({ onGameResult }) => {
   const [state, setState] = useState(defaultBoardState);
