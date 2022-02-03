@@ -1,4 +1,4 @@
-const La = [
+const pickableWords = [
   "cigar",
   "rebut",
   "sissy",
@@ -2315,7 +2315,7 @@ const La = [
   "rural",
   "shave",
 ];
-const Ta = [
+const otherWords = [
   "aahed",
   "aalii",
   "aargh",
@@ -12978,122 +12978,34 @@ const Ta = [
 const pickWinningNumber = () => {
   const s = new Date(2021, 5, 19, 0, 0, 0, 0);
   const t = new Date().setHours(0, 0, 0, 0) - s.setHours(0, 0, 0, 0);
-  return Math.round(t / 864e5) % La.length;
+  return Math.round(t / 864e5) % pickableWords.length;
 };
 
-const word = La[pickWinningNumber()];
+const winningWord = pickableWords[pickWinningNumber()];
 
-const copyState = (state) => JSON.parse(JSON.stringify(state));
-
-const toWord = (row) => row.map((tile) => tile.letter).join("");
-
-const markRow = (row) => {
-  const letters = [...word];
-  for (let i = 0; i < row.length; i++) {
-    if (row[i].letter === word[i]) {
-      row[i].color = "green";
-      deleteOne(letters, word[i]);
-    }
-  }
-
-  for (let i = 0; i < row.length; i++) {
-    if (row[i].color === "green") continue;
-    if (letters.includes(row[i].letter)) {
-      deleteOne(letters, row[i].letter);
-      row[i].color = "yellow";
-    } else {
-      row[i].color = "grey";
-    }
-  }
-};
+export const isRealWord = (word) => pickableWords.includes(word) || otherWords.includes(word);
 
 const deleteOne = (array, element) => {
-  const index = array.findIndex((e) => e === element);
-  if (index !== -1) array.splice(index, 1);
-};
+    const index = array.findIndex((e) => e === element);
+    if (index !== -1) array.splice(index, 1);
+  };
 
-const isRowWinning = (row) => row.every((tile) => tile.color === "green");
-
-export const updateState = (state, key) => {
-  if (state.locked) return [state, ""];
-  const newState = copyState(state);
-  let gameResult = "";
-  if (key.length === 1) {
-    const row = newState.tiles[newState.row];
-    const tile = row && row[newState.tile];
-    if (tile) {
-      tile.letter = key.toLowerCase();
-      newState.tile++;
-    }
-  } else if (key === "Backspace") {
-    const row = newState.tiles[newState.row];
-    const tile = row && row[newState.tile - 1];
-    if (tile) {
-      tile.letter = "";
-      newState.tile--;
-    }
-  } else if (key === "Enter") {
-    const row = newState.tiles[newState.row];
-    if (row && newState.tile === row.length) {
-      if (La.includes(toWord(row)) || Ta.includes(toWord(row))) {
-        markRow(row);
-        if (isRowWinning(row)) {
-          newState.locked = true;
-          gameResult = "won";
-        } else if (newState.row === newState.tiles.length - 1) {
-          newState.locked = true;
-          gameResult = "lost";
-        } else {
-          newState.row++;
-          newState.tile = 0;
+export const gradeWord = (word) => {
+    const result = Array(word.length).fill("grey");
+    const letters = [...winningWord];
+    for (let i = 0; i < result.length; i++) {
+        if (word[i] === winningWord[i]) {
+            deleteOne(letters, word[i]);
+            result[i] = "green";
         }
-      } else {
-        alert("not a word!");
-      }
     }
-  }
-  return [newState, gameResult];
-};
 
-export const defaultState = {
-  tiles: [
-    [
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-    ],
-    [
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-    ],
-    [
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-    ],
-    [
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-    ],
-    [
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-      { color: "black", letter: "" },
-    ],
-  ],
-  row: 0,
-  tile: 0,
-  locked: false,
+    for (let i = 0; i < result.length; i++) {
+        if (result[i] == "grey" && letters.includes(word[i])) {
+            deleteOne(letters, word[i]);
+            result[i] = "yellow";
+        }
+    }
+
+    return result;
 };

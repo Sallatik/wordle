@@ -1,17 +1,12 @@
 import "./Board.css";
 import Row from "./Row";
 import { useState } from "react";
-import { updateState, defaultState } from "../StateUpdater";
+import { updateBoardState, defaultBoardState } from "../modules/BoardState";
 
 export default ({ onGameResult }) => {
-  const [state, setState] = useState(defaultState);
-  const keyPressHandler = (event) => {
-    setState((prev) => {
-      const [newState, gameResult] = updateState(prev, event.key);
-      if (gameResult) onGameResult(gameResult);
-      return newState;
-    });
-  };
+  const [state, setState] = useState(defaultBoardState);
+  const keyPressHandler = (event) => setState(updateBoardState(event.key));
+  console.log(state);
   return (
     <div>
       <div className="board" tabIndex="0" onKeyDown={keyPressHandler}>
