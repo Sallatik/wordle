@@ -2,7 +2,7 @@ import "./Board.css";
 import Row from "./Row";
 import { useState, useEffect } from "react";
 import { createBoardState as createStartingBoardState } from "../modules/DefaultState";
-import AutoFocus from "./AutoFocus";
+import KeyboardFocus from "./KeyboardFocus";
 
 const isLetter = (key) => key.length === 1;
 const isBackspace = (key) => key === "Backspace";
@@ -24,11 +24,12 @@ export default ({ onGameResult, wordleConfig }) => {
 
   return (
     <div>
-      <AutoFocus className="board" onKeyDown={keyPressHandler}>
+      <KeyboardFocus onKeyDown={keyPressHandler} />
+      <div className="board">
         {state.tiles.map((row, index) => (
           <Row key={index} tiles={row} />
         ))}
-      </AutoFocus>
+      </div>
     </div>
   );
 };
