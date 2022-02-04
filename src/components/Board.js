@@ -8,10 +8,8 @@ const isBackspace = (key) => key === "Backspace";
 const isEnter = (key) => key === "Enter";
 
 export default ({ onGameResult }) => {
-  const divRef = useRef(null);
-  useEffect(() => divRef.current.focus(), [divRef]);
-
   const [state, setState] = useState(defaultBoardState);
+  
   useEffect(() => {
     if (state.gameWon) onGameResult({ won: true });
     else if (state.outOfTries) onGameResult({ won: false });
@@ -22,6 +20,9 @@ export default ({ onGameResult }) => {
     else if (isBackspace(key)) setState((prev) => prev.eraseLetter());
     else if (isEnter(key)) setState((prev) => prev.checkWord());
   };
+
+  const divRef = useRef(null);
+  useEffect(() => divRef.current.focus(), [divRef]);
 
   return (
     <div>
