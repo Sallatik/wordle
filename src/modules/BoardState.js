@@ -12,7 +12,7 @@ export class BoardState {
   }
 
   addLetter(letter) {
-    if (this.size.isWithinBounds(this.coordinates)) {
+    if (!this.gameWon && this.size.isWithinBounds(this.coordinates)) {
       return new BoardState(
         this.size,
         this.tileMatrix.withTileLetter(this.coordinates, letter),
@@ -23,7 +23,7 @@ export class BoardState {
 
   eraseLetter() {
     const eraseCoordinates = this.coordinates.withPreviousColumn();
-    if (this.size.isWithinBounds(eraseCoordinates)) {
+    if (!this.gameWon && this.size.isWithinBounds(eraseCoordinates)) {
       return new BoardState(
         this.size,
         this.tileMatrix.withTileLetter(eraseCoordinates, ""),
@@ -33,7 +33,7 @@ export class BoardState {
   }
 
   checkWord() {
-    if (this.size.isAtEndOfRow(this.coordinates)) {
+    if (!this.gameWon && this.size.isAtEndOfRow(this.coordinates)) {
       const word = this.tileMatrix.getWordFromRow(this.coordinates.row);
       if (words.isRealWord(word)) {
         const colors = words.gradeWord(word);
@@ -44,5 +44,12 @@ export class BoardState {
         );
       } else return this;
     } else return this;
+  }
+
+  get gameWon() {
+    return (
+      this.size.isRowWithinBounds(this.coordinates.previousRow) &&
+      this.tileMatrix.isRowAllGreen(this.coordinates.previousRow)
+    );
   }
 }

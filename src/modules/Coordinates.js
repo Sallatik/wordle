@@ -6,6 +6,10 @@ export class Coordinates {
     this.column = column;
   }
 
+  get previousRow() {
+    return this.row - 1;
+  }
+
   withNextColumn() {
     return new Coordinates(this.row, this.column + 1);
   }

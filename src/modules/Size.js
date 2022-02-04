@@ -6,11 +6,15 @@ export class Size {
     this.columns = columns;
   }
 
+  isRowWithinBounds(row) {
+    return row >= 0 && row < this.rows;
+  }
+
   isWithinBounds({ row, column }) {
-    return row >= 0 && row < this.rows && column >= 0 && column < this.columns;
+    return this.isRowWithinBounds(row) && column >= 0 && column < this.columns;
   }
 
   isAtEndOfRow({ row, column }) {
-    return row >= 0 && row < this.rows && column === this.columns;
+    return this.isRowWithinBounds(row) && column === this.columns;
   }
 }

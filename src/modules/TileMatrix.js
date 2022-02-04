@@ -31,4 +31,8 @@ export class TileMatrix {
       )
     );
   }
+
+  isRowAllGreen(row) {
+    return this.tiles[row].every(tile => tile.color == "green");
+  }
 }
