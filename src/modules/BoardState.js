@@ -11,6 +11,10 @@ export class BoardState {
     this.coordinates = coordinates;
   }
 
+  get tiles() {
+    return this.tileMatrix.tiles;
+  }
+  
   addLetter(letter) {
     if (!this.gameWon && this.size.isWithinBounds(this.coordinates)) {
       return new BoardState(
