@@ -1,6 +1,6 @@
 import "./Board.css";
 import Row from "./Row";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { defaultBoardState } from "../modules/DefaultState";
 
 const isLetter = (key) => key.length === 1;
@@ -8,8 +8,10 @@ const isBackspace = (key) => key === "Backspace";
 const isEnter = (key) => key === "Enter";
 
 export default ({ onGameResult }) => {
-  const [state, setState] = useState(defaultBoardState);
+  const divRef = useRef(null);
+  useEffect(() => divRef.current.focus(), [divRef]);
 
+  const [state, setState] = useState(defaultBoardState);
   useEffect(() => {
     if (state.gameWon) onGameResult({ won: true });
     else if (state.outOfTries) onGameResult({ won: false });
@@ -23,7 +25,12 @@ export default ({ onGameResult }) => {
 
   return (
     <div>
-      <div className="board" tabIndex="0" onKeyDown={keyPressHandler}>
+      <div
+        ref={divRef}
+        className="board"
+        tabIndex="-1"
+        onKeyDown={keyPressHandler}
+      >
         {state.tiles.map((row, index) => (
           <Row key={index} tiles={row} />
         ))}
