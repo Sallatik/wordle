@@ -15,11 +15,7 @@ export class BoardState {
     if (this.size.isWithinBounds(this.coordinates)) {
       return new BoardState(
         this.size,
-        this.tileMatrix.withTileLetter(
-          this.coordinates.row,
-          this.coordinates.column,
-          letter
-        ),
+        this.tileMatrix.withTileLetter(this.coordinates, letter),
         this.coordinates.withNextColumn()
       );
     } else return this;
@@ -30,11 +26,7 @@ export class BoardState {
     if (this.size.isWithinBounds(eraseCoordinates)) {
       return new BoardState(
         this.size,
-        this.tileMatrix.withTileLetter(
-          eraseCoordinates.row,
-          eraseCoordinates.column,
-          ""
-        ),
+        this.tileMatrix.withTileLetter(eraseCoordinates, ""),
         eraseCoordinates
       );
     } else return this;

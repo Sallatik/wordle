@@ -16,7 +16,7 @@ export class TileMatrix {
     return this.tiles[row].map((tile) => tile.letter).join("");
   }
 
-  withTileLetter(row, column, letter) {
+  withTileLetter({row, column}, letter) {
     return new TileMatrix(
       modifyMatrixElement(this.tiles, row, column, (tile) =>
         tile.withLetter(letter)
