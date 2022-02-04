@@ -1,10 +1,4 @@
-const modifyArrayElement = (array, index, f) =>
-  array.map((element, i) => (i === index ? f(element) : element));
-
-const modifyMatrixElement = (matrix, row, column, f) =>
-  modifyArrayElement(matrix, row, (array) =>
-    modifyArrayElement(array, column, f)
-  );
+import { modifyArrayElement, modifyMatrixElement } from "./ArrayUtils";
 
 export class TileMatrix {
   tiles;

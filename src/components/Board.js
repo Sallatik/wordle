@@ -1,20 +1,20 @@
 import "./Board.css";
 import Row from "./Row";
 import { useState, useEffect } from "react";
-import { defaultBoardState } from "../modules/DefaultState";
+import { createBoardState as createStartingBoardState } from "../modules/DefaultState";
 import AutoFocus from "./AutoFocus";
 
 const isLetter = (key) => key.length === 1;
 const isBackspace = (key) => key === "Backspace";
 const isEnter = (key) => key === "Enter";
 
-export default ({ onGameResult }) => {
-  const [state, setState] = useState(defaultBoardState);
+export default ({ onGameResult, wordleConfig }) => {
+  const [state, setState] = useState(createStartingBoardState(wordleConfig));
 
   useEffect(() => {
     if (state.gameWon) onGameResult({ won: true });
     else if (state.outOfTries) onGameResult({ won: false });
-  }, [state]);
+  }, [state, onGameResult]);
 
   const keyPressHandler = ({ key }) => {
     if (isLetter(key)) setState((prev) => prev.addLetter(key));

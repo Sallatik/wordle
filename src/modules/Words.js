@@ -12981,31 +12981,6 @@ const pickWinningNumber = () => {
   return Math.round(t / 864e5) % pickableWords.length;
 };
 
-const winningWord = pickableWords[pickWinningNumber()];
+export const winningWord = pickableWords[pickWinningNumber()];
 
-export const isRealWord = (word) => pickableWords.includes(word) || otherWords.includes(word);
-
-const deleteOne = (array, element) => {
-    const index = array.findIndex((e) => e === element);
-    if (index !== -1) array.splice(index, 1);
-  };
-
-export const gradeWord = (word) => {
-    const result = Array(word.length).fill("grey");
-    const letters = [...winningWord];
-    for (let i = 0; i < result.length; i++) {
-        if (word[i] === winningWord[i]) {
-            deleteOne(letters, word[i]);
-            result[i] = "green";
-        }
-    }
-
-    for (let i = 0; i < result.length; i++) {
-        if (result[i] == "grey" && letters.includes(word[i])) {
-            deleteOne(letters, word[i]);
-            result[i] = "yellow";
-        }
-    }
-
-    return result;
-};
+export const words = pickableWords.concat(otherWords);

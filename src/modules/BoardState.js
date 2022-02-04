@@ -1,11 +1,13 @@
-import * as words from "./Words";
+import { words } from "./Words";
 
 export class BoardState {
+  wordChecker;
   size;
   tileMatrix;
   coordinates;
 
-  constructor(size, tileMatrix, coordinates) {
+  constructor(wordChecker, size, tileMatrix, coordinates) {
+    this.wordChecker = wordChecker;
     this.size = size;
     this.tileMatrix = tileMatrix;
     this.coordinates = coordinates;
@@ -14,10 +16,11 @@ export class BoardState {
   get tiles() {
     return this.tileMatrix.tiles;
   }
-  
+
   addLetter(letter) {
     if (!this.gameWon && this.size.isWithinBounds(this.coordinates)) {
       return new BoardState(
+        this.wordChecker,
         this.size,
         this.tileMatrix.withTileLetter(this.coordinates, letter),
         this.coordinates.withNextColumn()
@@ -29,6 +32,7 @@ export class BoardState {
     const eraseCoordinates = this.coordinates.withPreviousColumn();
     if (!this.gameWon && this.size.isWithinBounds(eraseCoordinates)) {
       return new BoardState(
+        this.wordChecker,
         this.size,
         this.tileMatrix.withTileLetter(eraseCoordinates, ""),
         eraseCoordinates
@@ -39,9 +43,10 @@ export class BoardState {
   checkWord() {
     if (!this.gameWon && this.size.isAtEndOfRow(this.coordinates)) {
       const word = this.tileMatrix.getWordFromRow(this.coordinates.row);
-      if (words.isRealWord(word)) {
-        const colors = words.gradeWord(word);
+      if (this.wordChecker.isAllowedWord(word)) {
+        const colors = this.wordChecker.gradeWord(word);
         return new BoardState(
+          this.wordChecker,
           this.size,
           this.tileMatrix.withColoredRow(this.coordinates.row, colors),
           this.coordinates.withNextRow()
