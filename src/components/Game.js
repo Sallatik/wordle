@@ -8,7 +8,7 @@ export default () => {
   return (
     <div>
       <StatusMessage gameStatus={gameStatus} />
-      <Board onGameResult={setGameStatus} />
+      <Board onGameResult={({ won }) => setGameStatus(won ? "won" : "lost")} />
     </div>
   );
 };

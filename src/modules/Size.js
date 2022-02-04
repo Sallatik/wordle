@@ -17,4 +17,8 @@ export class Size {
   isAtEndOfRow({ row, column }) {
     return this.isRowWithinBounds(row) && column === this.columns;
   }
+
+  isAtEndOfBoard({ row, column }) {
+    return row === this.rows && column === 0;
+  }
 }

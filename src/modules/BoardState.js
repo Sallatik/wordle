@@ -52,4 +52,8 @@ export class BoardState {
       this.tileMatrix.isRowAllGreen(this.coordinates.previousRow)
     );
   }
+
+  get outOfTries() {
+    return this.size.isAtEndOfBoard(this.coordinates);
+  }
 }
