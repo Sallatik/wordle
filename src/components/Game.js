@@ -3,7 +3,7 @@ import Board from "./Board";
 import StatusMessage from "./StatusMessage";
 import { words, winningWord } from "../modules/Words";
 
-export default () => {
+const Game = () => {
   const [gameStatus, setGameStatus] = useState("playing");
   return (
     <div>
@@ -15,3 +15,5 @@ export default () => {
     </div>
   );
 };
+
+export default Game;

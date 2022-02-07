@@ -8,7 +8,7 @@ const isLetter = (key) => key.length === 1;
 const isBackspace = (key) => key === "Backspace";
 const isEnter = (key) => key === "Enter";
 
-export default ({ onGameResult, wordleConfig }) => {
+const Board = ({ onGameResult, wordleConfig }) => {
   const [state, setState] = useState(createStartingBoardState(wordleConfig));
 
   useEffect(() => {
@@ -33,3 +33,5 @@ export default ({ onGameResult, wordleConfig }) => {
     </>
   );
 };
+
+export default Board;

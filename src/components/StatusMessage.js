@@ -4,4 +4,8 @@ const statusToMessage = (status) => {
   else return "Good Luck!";
 };
 
-export default ({ gameStatus }) => <div>{statusToMessage(gameStatus)}</div>;
+const StatusMessage = ({ gameStatus }) => (
+  <div>{statusToMessage(gameStatus)}</div>
+);
+
+export default StatusMessage;

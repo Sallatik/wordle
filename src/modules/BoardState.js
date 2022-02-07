@@ -1,5 +1,3 @@
-import { words } from "./Words";
-
 export class BoardState {
   wordChecker;
   size;
