@@ -23,13 +23,13 @@ export default ({ onGameResult, wordleConfig }) => {
   };
 
   return (
-    <div>
+    <>
       <KeyboardFocus onKeyDown={keyPressHandler} />
       <div className="board">
         {state.tiles.map((row, index) => (
           <Row key={index} tiles={row} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
