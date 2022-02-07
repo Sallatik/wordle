@@ -1,8 +1,8 @@
 import Tile from "./Tile";
-import "./Row.css";
+import styles from "./Row.module.css";
 
 export default ({ tiles }) => (
-  <div className="row">
+  <div className={styles.row}>
     {tiles.map(({ color, letter }, index) => (
       <Tile key={index} color={color} letter={letter} />
     ))}

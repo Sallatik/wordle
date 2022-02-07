@@ -1,8 +1,8 @@
 import Game from "./components/Game";
-import "./App.css";
+import styles from "./App.module.css";
 
 export default () => (
-  <div class="app">
+  <div class={styles.app}>
     <Game />
   </div>
 );

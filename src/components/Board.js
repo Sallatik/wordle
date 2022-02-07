@@ -1,4 +1,4 @@
-import "./Board.css";
+import styles from "./Board.module.css";
 import Row from "./Row";
 import { useState, useEffect } from "react";
 import { createBoardState as createStartingBoardState } from "../modules/DefaultState";
@@ -25,7 +25,7 @@ export default ({ onGameResult, wordleConfig }) => {
   return (
     <>
       <KeyboardFocus onKeyDown={keyPressHandler} />
-      <div className="board">
+      <div className={styles.board}>
         {state.tiles.map((row, index) => (
           <Row key={index} tiles={row} />
         ))}

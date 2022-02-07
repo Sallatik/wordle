@@ -1,4 +1,3 @@
-import "./Game.css";
 import { useState } from "react";
 import Board from "./Board";
 import StatusMessage from "./StatusMessage";
