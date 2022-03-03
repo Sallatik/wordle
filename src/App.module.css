@@ -1,7 +1,4 @@
 .app {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-  overflow: hidden;
+  width: 530px;
+  margin: 100px auto;
 }

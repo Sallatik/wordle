@@ -1,15 +1,17 @@
 .tile {
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  line-height: 2rem;
-  font-weight: bold;
-  vertical-align: middle;
-  box-sizing: border-box;
+  height: 100px;
+  width: 105px;
+  border-right: 5px solid #4b4b4b;
+  display: inline-block;
   color: white;
   text-transform: uppercase;
-  user-select: none;
-  border: 2px solid gray;
+  font-size: 80px;
+  vertical-align: top;
+  padding-left: 20px;
+  padding-top: 7px;
+}
+
+.tile:last-child {
+  border-right: none;
+  width: 100px;
 }
