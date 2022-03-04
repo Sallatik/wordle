@@ -3,7 +3,7 @@
   width: 105px;
   border-right: 5px solid #4b4b4b;
   color: white;
-  font-size: 96px;
+  font-size: 80px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -12,5 +12,4 @@
 
 .tile:last-child {
   border-right: none;
-  width: 100px;
 }

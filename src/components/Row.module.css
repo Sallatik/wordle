@@ -1,11 +1,8 @@
 .row {
   border-bottom: 5px solid #4b4b4b;
-  width: 520px;
-  height: 105px;
   display: flex;
 }
 
 .row:last-child {
   border-bottom: none;
-  height: 100px;
 }
