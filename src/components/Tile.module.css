@@ -3,15 +3,19 @@
   width: 105px;
   border-right: 5px solid #4b4b4b;
   display: inline-block;
-  color: white;
-  text-transform: uppercase;
-  font-size: 80px;
   vertical-align: top;
-  padding-left: 20px;
-  padding-top: 7px;
 }
 
 .tile:last-child {
   border-right: none;
   width: 100px;
+}
+
+.letter {
+  color: white;
+  font-size: 96px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
