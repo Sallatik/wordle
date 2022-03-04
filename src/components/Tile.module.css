@@ -2,20 +2,15 @@
   height: 100px;
   width: 105px;
   border-right: 5px solid #4b4b4b;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.tile:last-child {
-  border-right: none;
-  width: 100px;
-}
-
-.letter {
   color: white;
   font-size: 96px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.tile:last-child {
+  border-right: none;
+  width: 100px;
 }
